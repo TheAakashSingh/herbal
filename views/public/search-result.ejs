@@ -696,11 +696,11 @@
         <div class="result-card">
             <!-- Search Header -->
             <div class="prize-details-header">
-                WINNER SEARCH RESULTS
+                YOUR PRIZE DETAILS
             </div>
 
             <!-- Search Form -->
-            <div style="background: #f8f9fa; padding: 20px; margin: 0;">
+            <!-- <div style="background: #f8f9fa; padding: 20px; margin: 0;">
                 <form method="get" action="/search-result" style="display: flex; gap: 10px; align-items: center;">
                     <input type="text" name="q" placeholder="Enter phone number to search"
                            value="<%= searchQuery || '' %>"
@@ -710,15 +710,15 @@
                         🔍 Search
                     </button>
                 </form>
-            </div>
+            </div> -->
 
             <!-- Search Results Section -->
-            <div class="section-header">SEARCH RESULTS</div>
+            <div class="section-header">Winner Details</div>
             <div class="winner-details-content">
-                <% if (searchQuery) { %>
+                <!-- <% if (searchQuery) { %>
                     <p><strong>Search Query:</strong> <%= searchQuery %></p>
                     <p><strong>Results Found:</strong> <%= winners ? winners.length : 0 %></p>
-                <% } %>
+                <% } %> -->
 
                 <% if (error) { %>
                     <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin: 15px 0;">
@@ -728,15 +728,15 @@
 
                 <% if (winners && winners.length > 0) { %>
                     <div style="margin-top: 20px;">
-                        <h4>Winner Details Found:</h4>
+                        <!-- <h4>Winner Details Found:</h4> -->
                         <% winners.forEach((winner, index) => { %>
                             <div style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
                                 <ul class="winner-details-list">
                                     <li>Phone No: <strong><%= winner.phone %></strong></li>
                                     <li>Name: <strong><%= winner.name %></strong></li>
-                                    <li>W-Code: <strong><%= winner.wcode %></strong></li>
+                                    <li>Address: <strong><%= winner.address %></strong></li>
                                     <li>Prize Amount: <strong>₹<%= winner.prizeAmount %></strong></li>
-                                    <li>Status: <strong style="color: <%= winner.status === 'Paid' ? '#28a745' : '#007bff' %>"><%= winner.status %></strong></li>
+                                    <li>Status: <strong style="color: <%= winner.status === 'Active' ? '#28a745' : '#007bff' %>"><%= winner.status %></strong></li>
                                     <li>Date: <strong><%= winner.formattedDate %></strong></li>
                                 </ul>
                                 <% if (winner.image) { %>
@@ -847,10 +847,10 @@
                 <!-- Process buttons -->
                 <div class="process-section">
                     <div class="process-buttons">
-                        <button class="process-btn" onclick="window.location.href='winner-cash.html'">
+                        <button class="process-btn" onclick="window.location.href='winner-cash'">
                             CASH PROCESS
                         </button>
-                        <button class="process-btn" onclick="window.location.href='car-processing.html'">
+                        <button class="process-btn" onclick="window.location.href='car-processing'">
                             CAR PROCESS
                         </button>
                     </div>

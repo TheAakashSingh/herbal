@@ -266,7 +266,7 @@ router.get('/search-result', async (req, res) => {
       })
         .sort({ createdAt: -1 })
         .limit(20)
-        .select('name phone image wcode createdAt prizeAmount status');
+        .select('name phone image wcode createdAt prizeAmount address status');
 
       // Mask phone numbers for privacy
       winners = winners.map(winner => ({
