@@ -1,0 +1,12 @@
+/* Minimal styles dedicated to admin.html */
+.admin-sidebar { width: 240px; min-height: calc(100vh - 56px); }
+@media (max-width: 991.98px) {
+	.admin-sidebar { position: fixed; left: -240px; top: 56px; z-index: 1030; transition: left .2s ease; }
+	.admin-sidebar.open { left: 0; }
+}
+
+#winnersTable td, #winnersTable th { vertical-align: middle; }
+
+.cursor-pointer { cursor: pointer; }
+
+

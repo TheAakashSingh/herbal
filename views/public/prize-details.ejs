@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prize Details - Herbal Lucky Draw</title>
+    <link rel="icon" href="images/herbal-fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-size: 12px;
+        }
+        
+        .user-details-data-1 {
+            padding: 20px 0;
+        }
+        
+        .user-details-data-2 {
+            background: white;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .user-details-data-2 h2 {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .user-details-data-3 {
+            padding: 15px;
+        }
+        
+        .user-details-data-4 {
+            border-top: 1px solid #eee;
+            padding: 15px 20px;
+        }
+        
+        .user-details-data-4 h3 {
+            background: #2c4a6b;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .user-details-data-4 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .user-details-data-4 li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 12px;
+        }
+        
+        .user-details-data-501 h3 {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .user-details-data-502 {
+            background: #dc3545;
+        }
+        
+        .user-details-data-502 .nav-link {
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        
+        .payment-data-2 {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .payment-data-2 img {
+            width: 100%;
+            max-width: 80px;
+        }
+        
+        .user-details-data-5 {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .user-details-data-6 {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .user-details-data-6 img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .user-details-data-6 h3 {
+            font-size: 12px;
+            margin: 10px 0 5px 0;
+            color: #333;
+        }
+        
+        .user-details-data-7 {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .user-details-data-8 {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .user-details-data-8 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .prize-gift {
+            background: #1e40af;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+            text-align: center;
+        }
+        
+        .prize-gift:hover {
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .user-details-data-9 {
+            background: white;
+            margin-top: 20px;
+        }
+        
+        .user-details-data-9 h3 {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .terms-condition-page-3 {
+            padding: 20px;
+        }
+        
+        .terms-condition-page-3 h3 {
+            background: transparent;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding: 0;
+        }
+        
+        .terms-condition-page-3 ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .terms-condition-page-3 li {
+            padding: 8px 0;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .terms-condition-page-3 .fa-check-circle {
+            color: #28a745;
+            margin-right: 8px;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .user-details-data-8 ul {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-details-data-5 .row > div {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="user-details-data-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="user-details-data-2">
+                        <h2>Your Prize Details</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="admin_panel/uploads/" class="img-responsive">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="user-details-data-3">
+                                    <h5></h5>
+                                    <p>Company Name:<strong></strong></p>
+                                    <img src="admin_panel/uploads/" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-details-data-4">
+                            <h3>Winner Details</h3>
+                            <ul>
+                                <li>Phone No: <strong>9999999999</strong></li>
+                                <li>Name: <strong></strong></li>
+                                <li>Address: <strong></strong></li>
+                                <li>Paid: <strong></strong></li>
+                                <li>Amount: <strong></strong></li>
+                                <li>Prize Amount: <strong></strong></li>
+                                <li>Process: <strong>You have to deposit before Rs.<b></b> to take this prize.If you want a cash, within 10 minutes we will deposit Rs. <b></b> in your bank account.If you want to car, we will be able to send your car to your address within 3 days. To collect this prize you must submit before Rs. <b></b> If you want cash, we will deposit Rs. <b></b> in your bank account within 10 minutes. If you want to get a car, we will be able to send your car to your address within 3 days. Keeping in mind your safety, we cannot send any prize without registration.</strong></li>
+                                <li>Company Info: <strong>Dear customer, you have been selected as the winner of the from our company So you are expected to follow all the terms and conditions of the company without any doubt. If you lose any of your original capital All its responsibilities will be with the company and if there is any kind of doubt or doubt on this, then you can also take legal action against the company. To take this price, you have to submit the registration charge first. The registration charge ₹ <b></b> will be transferred to your account by our company within 10 minutes of the deposit as soon as you submit the account number given inside the website. Submit on the account now, you make us note your account number, Sir, your account will be ₹ <b></b></strong></li>
+                                <li>Date: <strong></strong></li>
+                                <li>Status: <strong></strong></li>
+                                <li>W Code: <strong></strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="user-details-data-4">
+                            <h3>Bank Details</h3>
+                            <ul>
+                                <li>
+                                    <div style="margin: 0px; padding: 0px; border: none; outline: none; color: rgb(81, 81, 81); font-family: Roboto, 'open sans', arial, sans-serif; font-size: 14px; background-color: rgb(245, 245, 245);">
+                                        <p dir="ltr" style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; border: none; outline: none; position: relative; font-family: 'open sans', sans-serif; line-height: 22px; color: rgb(132, 132, 132); transition: all 500ms ease 0s;">
+                                        </p>
+                                        <div>
+                                            <pre>
+                                                <p>A/C No- 1234567890</p>
+                                                <p>IFSC CODE- XYZ10087</p>
+                                                <p>Account Holder Name- XYZ<br>(Prize Distributor Department)</p>
+                                                <div>Bank Name- XYZ Bank</div>
+                                            </pre>
+                                        </div>
+                                        <p></p>
+                                    </div>
+                                    <p><br></p>
+                                    <p></p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="user-details-data-501">
+                            <h3>Payment Mode</h3>
+                            <nav>
+                                <div class="nav nav-tabs nav-fill user-details-data-502" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Payment Option</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="payment-data-2">
+                                                <a href="https://play.google.com/store/apps/details?id=net.one97.paytm&hl=en_IN" target="_blank">
+                                                    <img src="images/pay-1.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="payment-data-2">
+                                                <a href="https://play.google.com/store/apps/details?id=com.phonepe.app&hl=en_IN" target="_blank">
+                                                    <img src="images/pay-2.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="payment-data-2">
+                                                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel&hl=en_IN" target="_blank">
+                                                    <img src="images/pay-3.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="payment-data-2">
+                                                <a href="https://play.google.com/store/apps/details?id=in.org.npci.upiapp&hl=en_IN" target="_blank">
+                                                    <img src="images/pay-4.jpg">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="user-details-data-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="user-details-data-6">
+                                        <img src="images/help.png">
+                                        <h3>Helpline No:</h3>
+                                        <p><a href="tel:18005725708">18005725708</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="user-details-data-6">
+                                        <img src="images/support.png">
+                                        <h3>Customer Support No:</h3>
+                                        <p><a href="tel:+919163571821">+919163571821</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="user-details-data-7">
+                            <img src="images/arrow.gif">
+                        </div>
+
+                        <div class="user-details-data-8">
+                            <ul>
+                                <li><a href="winner_cash.php" class="prize-gift">Cash Process</a></li>
+                                <li><a href="car_process.php" class="prize-gift">Car Process</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="user-details-data-9">
+                            <h3>Our Terms & Conditions</h3>
+                            <div class="terms-condition-page-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="terms-condition-page-3">
+                                            <h3>इनाम लेने के लिए सारी नियम एवं शर्तें मान्य होगी</h3>
+                                            <ul>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>ईनाम का पुरा नगद सीधे आपके बैंक खाते मे जायेगा। * सारे सरकारी कर और प्रक्रिया शुल्क ग्राहक (विजेता) को ही देना पड़ेगा। * सारे शुल्क विजेता से अग्रिम में एकत्रित किया जाएगा और किसी भी हालत में ऐ ईनाम की राशि के साथ एडजस्ट नहीं किया जाएगा। * परिणाम का निर्णय अंतिम एवं गैर विवादित होगा</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>इनामी राशि में कोई भी कटौती नहीं की जाएगी</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>इनाम के लिए जो भी फीस या टैक्स लगेगा वो वापस नहीं होगा</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>इनाम आपकी इच्छा अनुसार नहीं बदल सकते</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>इस प्रतियोगिता में कंपनी का कोई भी सदस्य भाग नहीं ले सकते हैं , ना ही मदद कर सकते हैं</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>इनाम में अगर कोई फीस या टैक्स लगता है तो वो विजेता को ही देना पड़ेगा</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>अगर किसी कारण वश विजेता इनाम इनाम को रद्द करवाते हैं तो विजेता का जमा राशि २१ दिन के अंदर दिया जायेगा</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>अगर पैसा जमा करवाने के बाद इनाम नहीं मिलता है तो उसका जिम्मेदार कंपनी होगा</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>कोई भी वाद विवाद न्यायालय में किया जायेगा</li>
+                                            </ul>
+                                            <h3>Rule of payment:</h3>
+                                            <ul>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>The full cash deposit will go directly to your bank account.</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>All government taxes and procedures will be paid to the customer (winner).</li>
+                                                <li><i class="fa fa-check-circle" aria-hidden="true"></i>All fees will be collected from the winner in advance and will not be adjusted with the amount of prize in any condition.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        // Get phone number from URL parameter
+        function getPhoneFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const phone = urlParams.get('phone');
+            if (phone) {
+                const phoneElement = document.querySelector('li strong');
+                if (phoneElement && phoneElement.textContent === '9999999999') {
+                    phoneElement.textContent = phone;
+                }
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            getPhoneFromURL();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Update - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .sidebar {
+            background: #1e4d72;
+            min-height: 100vh;
+            color: white;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+        }
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 0;
+        }
+        .top-header {
+            background: #1e4d72;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-area {
+            padding: 30px;
+            background: #f5f5f5;
+            min-height: calc(100vh - 70px);
+        }
+        .update-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .update-icon {
+            color: #17a2b8;
+            margin-right: 10px;
+        }
+        .form-control:focus {
+            border-color: #1e4d72;
+            box-shadow: 0 0 0 0.2rem rgba(30, 77, 114, 0.25);
+        }
+        .btn-update {
+            background: #1e4d72;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+        }
+        .btn-update:hover {
+            background: #164058;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-link text-white p-0 me-3" style="font-size: 18px;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h5 class="mb-0">Admin Panel</h5>
+            </div>
+        </div>
+        
+        <nav class="nav flex-column mt-3">
+            <a class="nav-link" href="/admin/dashboard">
+                <i class="fas fa-tachometer-alt"></i>Dashboard
+            </a>
+            <a class="nav-link" href="/admin/upload">
+                <i class="fas fa-upload"></i>Upload Excel
+            </a>
+            <a class="nav-link" href="/admin/winners">
+                <i class="fas fa-trophy"></i>Winner List
+            </a>
+            <a class="nav-link" href="/admin/bank-details">
+                <i class="fas fa-university"></i>Bank Details
+            </a>
+            <a class="nav-link active" href="/admin/bank-update">
+                <i class="fas fa-edit"></i>Bank Update
+            </a>
+            <a class="nav-link" href="/admin/update-prize">
+                <i class="fas fa-gift"></i>Update Prize
+            </a>
+            <a class="nav-link" href="/admin/prize-request">
+                <i class="fas fa-hand-paper"></i>Prize Request
+            </a>
+            <a class="nav-link" href="/admin/car-processing">
+                <i class="fas fa-car"></i>Car Processing Request
+            </a>
+            <a class="nav-link" href="/admin/logout">
+                <i class="fas fa-sign-out-alt"></i>Logout
+            </a>
+        </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div class="top-header">
+            <h4 class="mb-0">Admin Dashboard</h4>
+            <span>Welcome, <%= adminUsername %></span>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="content-area">
+            <div class="update-card">
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-edit update-icon" style="font-size: 24px;"></i>
+                    <h3 class="mb-0">Bank Update</h3>
+                </div>
+                
+                <% if (success && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i><%= success %>
+                    </div>
+                <% } %>
+                
+                <% if (error && error.length > 0) { %>
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i><%= error %>
+                    </div>
+                <% } %>
+                
+                <form action="/admin/bank-update" method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Winner Phone Number</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Winner Name</label>
+                            <input type="text" class="form-control" name="winnerName" placeholder="Enter winner name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Bank Name</label>
+                            <input type="text" class="form-control" name="bankName" placeholder="Enter bank name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Account Number</label>
+                            <input type="text" class="form-control" name="accountNumber" placeholder="Enter account number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">IFSC Code</label>
+                            <input type="text" class="form-control" name="ifscCode" placeholder="Enter IFSC code" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Account Holder Name</label>
+                            <input type="text" class="form-control" name="accountHolderName" placeholder="Enter account holder name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Prize Amount</label>
+                            <input type="number" class="form-control" name="prizeAmount" placeholder="Enter prize amount" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" name="status" required>
+                                <option value="">Select Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Verified">Verified</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Notes (Optional)</label>
+                        <textarea class="form-control" name="notes" rows="3" placeholder="Enter any additional notes"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-update">
+                        <i class="fas fa-save me-2"></i>Update Bank Details
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

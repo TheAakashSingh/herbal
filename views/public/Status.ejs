@@ -1,0 +1,220 @@
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from herballuckydraw.com/Status.php by  Website Copier/3.x [XR&CO'2014], Fri, 01 Aug 2025 09:08:12 GMT -->
+<!-- Added by  --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by  -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>
+	Online Shopping  
+</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="icon" href="images/herbal-fav.png" type="image/x-icon" /><link href="css/style1.css" rel="stylesheet" /><link href="css/custom.css" rel="stylesheet" /><link href="css/responsive1.css" rel="stylesheet" /><link href="plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" /><link href="plugins/floating-wpp/floating-wpp.css" rel="stylesheet" />
+</head>
+<body>
+ 
+         <!-- main header area -->
+        <header class="main-header">
+            <!--header upper start-->
+            <div class="header-upper">
+                <div class="container">
+                    <ul class="top-left">
+                        <li>  <i class="fa fa-phone"></i>SUPPORT NUMBER:<a id="SupportLinkButton1" href="tel:+919341098599 ">+919163571821 </a></li>
+                        <li>  <i class="fa fa-whatsapp"></i> What’s App Number: <a>+919163571821</a></li>
+                    </ul>
+                    <div class="top-right">
+                     </div>
+                </div>
+            </div>
+            <!--header upper end-->
+
+            <!-- header lower start-->
+            <div class="header-lower">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <div class="logo-data-1">
+                                <a href="/">
+                                    <img style="width:90px; " src="images/herbal-logo.png" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-sm-12 col-xs-12">
+                            <div class="menu-bar">
+                                <nav class="main-menu">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <div class="navbar-collapse collapse clearfix">
+                                        <ul class="navigation clearfix">
+                                            <li><a href="/Products" >Products</a></li>
+                                            <li><a href="/Prize" >Prize</a></li>
+                                            <li><a href="/How-to-Win" >How to Win</a></li>
+                                            <li><a href="/Winner-List" >Winner List</a></li>
+                                            <li><a href="/Status" >Check Status</a></li>
+                                            <li><a href="/Terms" >Terms & Conditions</a></li>
+                                            <li><a href="/Contact" >Contact</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end main header area -->
+
+   
+ 
+    <!-- page title start -->
+    <div class="about-bg centered">
+        <div class="container">
+            <div class="text">Check Status</div>
+        </div>
+    </div>
+    <!--page title end -->
+<script>
+// Phone search function - Updated for dynamic backend
+function searchPhone(event) {
+    event.preventDefault();
+    const phoneInput = document.getElementById('phoneInput');
+    const phoneNumber = phoneInput.value.trim();
+
+    if (phoneNumber.length >= 10) {
+        // Redirect to dynamic search result page with phone number
+        window.location.href = `/search-result?q=${phoneNumber}&type=phone`;
+    } else {
+        Swal.fire('Invalid Phone Number', 'Please enter a valid 10-digit phone number', 'warning');
+    }
+    return false;
+}
+</script>
+    <!-- feature-section -->
+    <section class="feature-section check-prize-data-4">
+        <div class="container">
+            <div class="feature-title centered">
+                <div class="section-title">
+                    <h2>To Check your Prize </h2></div>
+                <div class="title-text">
+                    <p>Enter Your Mobile Number</p>
+                </div>
+            </div>
+ 
+			<div class="check-prize-data-1">
+				<div class="row">
+
+
+				  <form method="get" action="/search-result" onsubmit="return validatePhoneSearch(event)">
+					  <div class="col-md-9">
+					    <div class="check-prize-data-2">
+                           <input type="number" name="q" id="phoneInput" class="form-control" placeholder="Enter phone Number" required />
+                           <input type="hidden" name="type" value="phone" />
+                        </div>
+					   </div>
+					   <div class="col-md-3">
+						<div class="check-prize-data-3">
+                            <input type="submit" name="submit" value="Submit" class="btn-one style-one radi" style="color:White;" />
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+        </div>
+    </section>
+           
+
+		<footer class="main-footer footer-data-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-data-1">
+                            <a href="https://wa.me/+919163571821"> <p>Head office : <i class='fa fa-whatsapp' aria-hidden='true'></i>+919163571821</p>
+                            </a>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- main footer area end -->
+        <!-- footer bottom -->
+        <section class="footer-bottom centered">
+            <div class="container">
+                <div class="copyright">
+                     <p>Herbal Ayurveda Pvt. Ltd.</p>
+                </div>
+            </div>
+        </section>
+        <div id="myButton"></div>
+        <input name="ctl00$HFSupportNumber" value="+919163571821" id="HFSupportNumber" type="hidden" />
+  
+
+    <!--jquery js -->
+
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slider-active.js" type="text/javascript"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bxslider.js"></script>
+    <script type="text/javascript" src="js/SmoothScroll.js"></script>
+    <script type="text/javascript" src="js/jQuery.style.switcher.min.js"></script>
+    <script src="js/jquery.fancybox.pack.js"></script>
+
+    <script src="revolution/js/jquery.themepunch.tools.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/jquery.themepunch.revolution.min.js" type="text/javascript">
+    </script>
+    <!-- slider revolution 5.0 extensions  (load extensions only on local file systems !  the following part can be removed on server for on demand loading) -->
+    <script src="revolution/js/extensions/revolution.extension.actions.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.carousel.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.kenburn.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.layeranimation.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.migration.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.navigation.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.parallax.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.slideanims.min.js" type="text/javascript">
+    </script>
+    <script src="revolution/js/extensions/revolution.extension.video.min.js" type="text/javascript">
+    </script>
+
+    <script src="js/script.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="plugins/floating-wpp/floating-wpp.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#myButton').floatingWhatsApp({
+                phone: document.getElementById('HFSupportNumber').value,
+                popupMessage: 'Hello, How I help you?',
+                message: "",
+                showPopup: true,
+                showOnIE: false,
+                position: 'right',
+                headerTitle: 'Welcome to our Website ',
+                headerColor: 'green',
+                backgroundColor: 'green',
+                size: '60px'
+            });
+        });
+    </script>
+
+	
+	
+</body>
+
+<!-- Mirrored from herballuckydraw.com/Status.php by  Website Copier/3.x [XR&CO'2014], Fri, 01 Aug 2025 09:08:12 GMT -->
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winner Cash - Herbal Lucky Draw</title>
+    <link rel="icon" href="images/herbal-fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        /* Header Top */
+        .header-top {
+            background: #1e3c72;
+            color: white;
+            padding: 8px 0;
+            font-size: 12px;
+        }
+
+        .header-top-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .support-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .support-item i {
+            color: #f6b129;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 139px;
+            height: 53px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #f6b129;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: url('images/mid-banner.jpg') center/cover;
+            background-color: #ff9800;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #4472C4;
+            min-height: calc(100vh - 200px);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Winner Card */
+        .winner-card {
+            background: white;
+            border-radius: 20px;
+            padding: 42px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Action Form Container */
+        .action-form-container {
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .winner-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .winner-name {
+            font-size: 16px;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .prize-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .prize-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .copy-icon {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-icon:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            margin-bottom: 0;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .action-btn {
+            background: #012b72;
+            border: none;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: white;
+        }
+
+        .action-btn:hover {
+            background: #2E5BBA;
+        }
+
+        .action-btn i {
+                font-size: 25px;
+    color: #0d4fbf;
+    padding-top: 20px;
+    line-height: 0px;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    line-height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 32px;
+
+        }
+        
+
+        .action-btn span {
+            font-size: 12px;
+            color: white;
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            padding: 40px;
+            margin-top: 0;
+        }
+
+        .form-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .form-title-center {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4472C4;
+            background: white;
+            box-shadow: 0 0 0 2px rgba(68, 114, 196, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #f57c00;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content i {
+            color: #f6b129;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .action-buttons {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1px;
+            }
+
+            .action-btn {
+                padding: 15px 8px;
+            }
+
+            .action-btn i {
+                font-size: 20px;
+            }
+
+            .action-btn span {
+                font-size: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .winner-card,
+            .form-section {
+                margin: 0 10px;
+                padding: 20px;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+            }
+
+            .winner-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .prize-section {
+                align-self: stretch;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="support-item">
+                <i class="fas fa-phone"></i>
+                <span>SUPPORT NUMBER:+919163571821</span>
+            </div>
+            <div class="support-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>What's App Number:+919163571821</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <img style="width:90px; height:66px; " src="images/herbal-logo.png" /></a>
+                <!-- <span class="logo-text">Ayurveda Herbal</span> -->
+            </a>
+            <ul class="navigation clearfix">
+                <li><a href="/Products" >Products</a></li>
+                <li><a href="/Prize" >Prize</a></li>
+                <li><a href="/How-to-Win" >How to Win</a></li>
+                <li><a href="/Winner-List" >Winner List</a></li>
+                <li><a href="/Status" >Check Status</a></li>
+                <li><a href="/Terms" >Terms & Conditions</a></li>
+                <li><a href="/Contact" >Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1 class="hero-title">Winner-cash</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Winner Card -->
+            <div class="winner-card">
+                <div class="winner-info">
+                    <span class="winner-name">Name:</span>
+                    <div>
+                        <span class="prize-amount">Prize Amount ₹ 6,30,000.00</span>
+                        <button class="copy-icon">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Combined Action Buttons and Form -->
+            <div class="action-form-container">
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                <button class="action-btn">
+                    <i class="fas fa-home"></i>
+                    <span>Send Bank Details</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Request Money</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fab fa-cc-visa"></i>
+                    <span>Bill Pay</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Oil& Gas</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-plus"></i>
+                    <span>Other</span>
+                </button>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2 class="form-title">Send your request to Prize Department</h2>
+
+                <form>
+                    <div class="form-group">
+                        <label for="account-holder">Account Holder's Name</label>
+                        <input type="text" id="account-holder" placeholder="Account Holder's Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account-no">Account No</label>
+                        <input type="text" id="account-no" placeholder="Account No.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ifsc-code">IFSC Code</label>
+                        <input type="text" id="ifsc-code" placeholder="IFSC Code">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank-name">Bank Name</label>
+                        <input type="text" id="bank-name" placeholder="Bank Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile-no">Mobile No</label>
+                        <input type="tel" id="mobile-no" placeholder="Mobile No">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alternate-contact">Alternate Contact No</label>
+                        <input type="tel" id="alternate-contact" placeholder="Alternate Contact No.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prize">Prize</label>
+                        <input type="text" id="prize" placeholder="Prize">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="text" id="date" placeholder="Friday 1st of August 2025 05:30:13 PM">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <p>Head office : <i class="fas fa-phone"></i>+919163571821</p>
+            <p style="margin-top: 10px;">Copyright © 2025-2026 All Rights Reserved</p>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/9190007924656" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Copy functionality
+        document.querySelector('.copy-icon').addEventListener('click', function() {
+            const prizeAmount = document.querySelector('.prize-amount').textContent;
+            navigator.clipboard.writeText(prizeAmount).then(function() {
+                alert('Prize amount copied to clipboard!');
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your request has been submitted to the Prize Department!');
+        });
+
+        // Action button clicks
+        document.querySelectorAll('.action-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.querySelector('span').textContent;
+                alert(`${action} feature will be available soon!`);
+            });
+        });
+    </script>
+</body>
+</html>

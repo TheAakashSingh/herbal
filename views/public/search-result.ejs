@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Search Result - Online Shopping</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/herbal-fav.png" type="image/x-icon" />
+    <link href="css/style1.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/responsive1.css" rel="stylesheet" />
+    <link href="plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="plugins/floating-wpp/floating-wpp.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-size: 12px;
+        }
+        .search-result-container {
+            background: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .result-card {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0;
+            overflow: hidden;
+        }
+        .phone-display {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 25px;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .prize-details-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            border-radius: 0;
+        }
+        .section-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        .form-content {
+            padding: 18px 20px;
+            background: white;
+        }
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .form-group {
+            flex: 1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+            color: #444;
+            font-weight: 600;
+        }
+        .form-control {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 11px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .textarea-control {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 11px;
+            resize: vertical;
+            min-height: 50px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .description-text {
+            padding: 12px 18px;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #333;
+            background: #f8f9fa;
+            margin: 0;
+            text-align: justify;
+        }
+        .description-text p {
+            margin: 8px 0;
+        }
+        .payment-section {
+            margin-top: 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .payment-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .payment-option-banner {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 24px;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .payment-option-banner:hover {
+            background: #c82333;
+        }
+        .payment-apps-container {
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 0 20px 20px 20px;
+            border-radius: 8px;
+        }
+
+        /* Support Section Styles */
+        .support-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .support-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .support-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin: 0 auto 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .support-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .helpline-icon {
+            background: white;
+        }
+
+        .customer-support-icon {
+            background: white;
+        }
+
+        .support-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        .support-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c4a6b;
+            margin-top: 5px;
+        }
+
+        /* Bank Details Section */
+        .bank-details-section {
+            background: white;
+            margin-bottom: 0;
+        }
+
+        .bank-details-content {
+            padding: 0;
+            background: white;
+        }
+
+        .bank-info {
+            background: #f8f9fa;
+            padding: 25px 20px;
+            border: 1px solid #e0e0e0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .bank-detail-item {
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #999;
+            line-height: 1.4;
+            font-weight: normal;
+        }
+
+        .bank-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .department {
+            font-size: 13px;
+            color: #999;
+            font-weight: normal;
+            text-align: center;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .bank-name {
+            font-size: 13px;
+            color: #333;
+            font-weight: normal;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Payment Section */
+        .payment-content {
+            background: white;
+        }
+
+        .payment-option-text {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #999;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option-text:hover {
+            background: #e9ecef;
+        }
+
+        .payment-option-banner {
+            background: #dc3545;
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option-banner:hover {
+            background: #c82333;
+        }
+
+        /* Desktop Payment Apps - Row Layout */
+        .payment-apps-grid {
+            display: none;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 15px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            padding: 20px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .payment-apps-grid.show {
+            display: flex !important;
+        }
+
+        .payment-app-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 120px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        .payment-app-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-color: #007bff;
+        }
+
+        .payment-app-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .payment-apps-grid.show {
+            display: grid;
+        }
+
+        .payment-app-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-app-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .payment-app-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        /* Winner Details Styles */
+        .winner-details-content {
+            padding: 18px 20px;
+            background: white;
+        }
+
+        .winner-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .winner-details-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .winner-details-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Arrow Section */
+        .arrow-section {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .arrow-gif {
+            max-width: 100px;
+            height: auto;
+            display: inline-block;
+        }
+
+        /* Mobile responsiveness for arrow */
+        @media (max-width: 768px) {
+            .arrow-gif {
+                max-width: 80px;
+            }
+
+            .arrow-section {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .arrow-gif {
+                max-width: 70px;
+            }
+
+            .arrow-section {
+                padding: 20px;
+            }
+        }
+
+        /* Process Buttons */
+        .process-section {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .process-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .process-btn {
+            background: #1e40af;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .process-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(30, 64, 175, 0.3);
+        }
+
+        /* Terms Section */
+        .terms-section {
+            background: white;
+            margin-top: 20px;
+        }
+
+        .terms-content {
+            padding: 20px;
+        }
+
+        .terms-content h3 {
+            background: transparent;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        .terms-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .terms-list li {
+            padding: 8px 0;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .terms-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+
+
+
+
+        .terms-section {
+            background: white;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0;
+            overflow: hidden;
+        }
+        .terms-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .terms-content {
+            padding: 18px 20px;
+            font-size: 10px;
+            line-height: 1.4;
+            color: #444;
+            text-align: justify;
+        }
+        .terms-content p {
+            margin: 8px 0;
+        }
+        .terms-content ul {
+            margin: 8px 0;
+            padding-left: 18px;
+        }
+        .terms-content li {
+            margin-bottom: 4px;
+        }
+        .payment-rules {
+            background: white;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .payment-rules-header {
+            background: #2c4a6b;
+            color: white;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .payment-rules-content {
+            padding: 18px 20px;
+            font-size: 10px;
+            line-height: 1.4;
+            color: #444;
+            text-align: justify;
+        }
+        .payment-rules-content p {
+            margin: 8px 0;
+        }
+        .payment-rules-content ul {
+            margin: 8px 0;
+            padding-left: 18px;
+        }
+        .payment-rules-content li {
+            margin-bottom: 4px;
+        }
+        .footer-contact {
+            background: #2c5aa0;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .footer-contact i {
+            margin-right: 6px;
+        }
+        .copyright {
+            background: #1a365d;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 10px;
+        }
+
+
+        @media (max-width: 768px) {
+            .search-result-container {
+                padding: 10px;
+            }
+            .support-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 20px 15px;
+            }
+            .process-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            /* Mobile Payment Apps - Column Layout */
+            .payment-apps-grid {
+                flex-direction: column !important;
+                flex-wrap: nowrap !important;
+                gap: 12px;
+                padding: 20px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .payment-app-item {
+                width: 250px;
+                height: 70px;
+                padding: 12px;
+                flex-shrink: 0;
+                flex-grow: 0;
+            }
+
+            .payment-app-item img {
+                width: 60px;
+                height: 40px;
+            }
+            .terms-section, .payment-rules {
+                margin: 15px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-upper">
+            <div class="container">
+                <ul class="top-left">
+                    <li><i class="fa fa-phone"></i>SUPPORT NUMBER:<a href="tel:+919341098599">+919163571821 </a></li>
+                    <li><i class="fa fa-whatsapp"></i> What's App Number: <a>+919163571821</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-lower">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="logo-data-1">
+                            <a href="/">
+                                <img style="width:90px; " src="images/herbal-logo.png" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="menu-bar">
+                            <nav class="main-menu">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li><a href="/Products">Products</a></li>
+                                        <li><a href="/Prize">Prize</a></li>
+                                        <li><a href="/How-to-Win">How to Win</a></li>
+                                        <li><a href="/Winner-List">Winner List</a></li>
+                                        <li><a href="/Status">Check Status</a></li>
+                                        <li><a href="/Terms">Terms & Conditions</a></li>
+                                        <li><a href="/Contact">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Result Content -->
+    <section class="search-result-container">
+        <div class="result-card">
+            <!-- Search Header -->
+            <div class="prize-details-header">
+                WINNER SEARCH RESULTS
+            </div>
+
+            <!-- Search Form -->
+            <div style="background: #f8f9fa; padding: 20px; margin: 0;">
+                <form method="get" action="/search-result" style="display: flex; gap: 10px; align-items: center;">
+                    <input type="text" name="q" placeholder="Enter phone number to search"
+                           value="<%= searchQuery || '' %>"
+                           style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" required>
+                    <input type="hidden" name="type" value="phone">
+                    <button type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                        🔍 Search
+                    </button>
+                </form>
+            </div>
+
+            <!-- Search Results Section -->
+            <div class="section-header">SEARCH RESULTS</div>
+            <div class="winner-details-content">
+                <% if (searchQuery) { %>
+                    <p><strong>Search Query:</strong> <%= searchQuery %></p>
+                    <p><strong>Results Found:</strong> <%= winners ? winners.length : 0 %></p>
+                <% } %>
+
+                <% if (error) { %>
+                    <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <strong>❌ <%= error %></strong>
+                    </div>
+                <% } %>
+
+                <% if (winners && winners.length > 0) { %>
+                    <div style="margin-top: 20px;">
+                        <h4>Winner Details Found:</h4>
+                        <% winners.forEach((winner, index) => { %>
+                            <div style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745;">
+                                <ul class="winner-details-list">
+                                    <li>Phone No: <strong><%= winner.phone %></strong></li>
+                                    <li>Name: <strong><%= winner.name %></strong></li>
+                                    <li>W-Code: <strong><%= winner.wcode %></strong></li>
+                                    <li>Prize Amount: <strong>₹<%= winner.prizeAmount %></strong></li>
+                                    <li>Status: <strong style="color: <%= winner.status === 'Paid' ? '#28a745' : '#007bff' %>"><%= winner.status %></strong></li>
+                                    <li>Date: <strong><%= winner.formattedDate %></strong></li>
+                                </ul>
+                                <% if (winner.image) { %>
+                                    <div style="margin-top: 10px;">
+                                        <img src="<%= winner.image %>" alt="Winner Photo" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else if (searchQuery && !error) { %>
+                    <div style="background: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <strong>ℹ️ No winners found for the search query: "<%= searchQuery %>"</strong>
+                    </div>
+                <% } %>
+
+                <% if (!searchQuery) { %>
+                    <div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <strong>🔍 Enter a phone number to search for winners</strong>
+                    </div>
+                <% } %>
+            </div>
+
+            <!-- Bank Details Section -->
+            <div class="bank-details-section">
+                <div class="section-header">BANK DETAILS</div>
+                <div class="bank-details-content">
+                    <div class="bank-info">
+                        <% if (companyBankDetails) { %>
+                            <div class="bank-detail-item">A/C No- <%= companyBankDetails.accountNumber %></div>
+
+                            <div class="bank-detail-item">IFSC CODE- <%= companyBankDetails.ifscCode %></div>
+
+                            <div class="bank-detail-item">Account Holder Name- <%= companyBankDetails.accountHolderName %></div>
+
+                            <div class="department">(<%= companyBankDetails.displayName || 'Prize Distributor Department' %>)</div>
+
+                            <div class="bank-name">Bank Name- <%= companyBankDetails.bankName %></div>
+
+                            <% if (companyBankDetails.upiId) { %>
+                                <div class="bank-detail-item">UPI ID- <%= companyBankDetails.upiId %></div>
+                            <% } %>
+
+                            <% if (companyBankDetails.contactPhone) { %>
+                                <div class="bank-detail-item">Contact- <%= companyBankDetails.contactPhone %></div>
+                            <% } %>
+                        <% } else { %>
+                            <div class="bank-detail-item">A/C No- 000000</div>
+
+                            <div class="bank-detail-item">IFSC CODE- XYZ0000</div>
+
+                            <div class="bank-detail-item">Account Holder Name- XYZ</div>
+
+                            <div class="department">(Prize Distributor Department)</div>
+
+                            <div class="bank-name">Bank Name- XYZ Bank</div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="payment-section">
+                <div class="section-header">PAYMENT MODE</div>
+                <div class="payment-content">
+                    <div class="payment-option-banner" onclick="togglePaymentOptions()">Payment Option</div>
+
+                    <!-- Payment Apps Grid (Initially Hidden) -->
+                    <div class="payment-apps-grid" id="paymentAppsGrid" style="display: none;">
+                        <div class="payment-app-item" onclick="openPlayStore('paytm')">
+                            <img src="images/pay-1.jpg" alt="Paytm">
+                        </div>
+                        <div class="payment-app-item" onclick="openPlayStore('phonepe')">
+                            <img src="images/pay-2.jpg" alt="PhonePe">
+                        </div>
+                        <div class="payment-app-item" onclick="openPlayStore('gpay')">
+                            <img src="images/pay-3.jpg" alt="Google Pay">
+                        </div>
+                        <div class="payment-app-item" onclick="openPlayStore('bhim')">
+                            <img src="images/pay-4.jpg" alt="BHIM UPI">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Section -->
+                <div class="support-section">
+                    <div class="support-item" onclick="showHelplineInfo()">
+                        <div class="support-icon helpline-icon">
+                            <img src="images/help.png" alt="Helpline">
+                        </div>
+                        <div class="support-label">Helpline No:</div>
+                        <div class="support-number">+919163571821</div>
+                    </div>
+                    <div class="support-item" onclick="showCustomerSupport()">
+                        <div class="support-icon customer-support-icon">
+                            <img src="images/support.png" alt="Customer Support">
+                        </div>
+                        <div class="support-label">Customer Support No:</div>
+                        <div class="support-number">+919163571821</div>
+                    </div>
+                </div>
+
+                <!-- Arrow pointing down -->
+                <div class="arrow-section">
+                    <img src="./images/arrow.gif" alt="Arrow pointing down" class="arrow-gif">
+                </div>
+
+                <!-- Process buttons -->
+                <div class="process-section">
+                    <div class="process-buttons">
+                        <button class="process-btn" onclick="window.location.href='winner-cash.html'">
+                            CASH PROCESS
+                        </button>
+                        <button class="process-btn" onclick="window.location.href='car-processing.html'">
+                            CAR PROCESS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- Terms & Conditions Section -->
+            <div class="terms-section">
+                <div class="section-header">Our Terms & Conditions</div>
+                <div class="terms-content">
+                    <h3>इनाम लेने के लिए सारी नियम एवं शर्तें मान्य होगी</h3>
+                    <ul class="terms-list">
+                        <li>✓ ईनाम का पुरा नगद सीधे आपके बैंक खाते मे जायेगा। * सारे सरकारी कर और प्रक्रिया शुल्क ग्राहक (विजेता) को ही देना पड़ेगा। * सारे शुल्क विजेता से अग्रिम में एकत्रित किया जाएगा और किसी भी हालत में ऐ ईनाम की राशि के साथ एडजस्ट नहीं किया जाएगा। * परिणाम का निर्णय अंतिम एवं गैर विवादित होगा</li>
+                        <li>✓ इनामी राशि में कोई भी कटौती नहीं की जाएगी</li>
+                        <li>✓ इनाम के लिए जो भी फीस या टैक्स लगेगा वो वापस नहीं होगा</li>
+                        <li>✓ इनाम आपकी इच्छा अनुसार नहीं बदल सकते</li>
+                        <li>✓ इस प्रतियोगिता में कंपनी का कोई भी सदस्य भाग नहीं ले सकते हैं , ना ही मदद कर सकते हैं</li>
+                        <li>✓ इनाम में अगर कोई फीस या टैक्स लगता है तो वो विजेता को ही देना पड़ेगा</li>
+                        <li>✓ अगर किसी कारण वश विजेता इनाम इनाम को रद्द करवाते हैं तो विजेता का जमा राशि २१ दिन के अंदर दिया जायेगा</li>
+                        <li>✓ अगर पैसा जमा करवाने के बाद इनाम नहीं मिलता है तो उसका जिम्मेदार कंपनी होगा</li>
+                        <li>✓ कोई भी वाद विवाद न्यायालय में किया जायेगा</li>
+                    </ul>
+                    <h3>Rule of payment:</h3>
+                    <ul class="terms-list">
+                        <li>✓ The full cash deposit will go directly to your bank account.</li>
+                        <li>✓ All government taxes and procedures will be paid to the customer (winner).</li>
+                        <li>✓ All fees will be collected from the winner in advance and will not be adjusted with the amount of prize in any condition.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer-contact">
+        <i class="fa fa-phone"></i> Head office :+919163571821
+    </div>
+
+    <div class="copyright">
+       <p>Herbal Ayurveda Pvt. Ltd.</p>
+    </div>
+
+    <div id="myButton"></div>
+    <input name="ctl00$HFSupportNumber" value="+919163571821" id="HFSupportNumber" type="hidden" />
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="plugins/floating-wpp/floating-wpp.js"></script>
+
+
+    <script type="text/javascript">
+        // Get phone number from URL parameter
+        function getPhoneFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const phone = urlParams.get('q');
+            if (phone) {
+                // Update any phone display elements
+                const phoneElements = document.querySelectorAll('#searchedPhone');
+                phoneElements.forEach(el => el.textContent = phone);
+
+                // Update mobile input if exists
+                const mobileInput = document.querySelector('input[name="mobile"]');
+                if (mobileInput) {
+                    mobileInput.value = phone;
+                }
+            }
+        }
+
+        // Payment method selection
+        function selectPayment(method) {
+            const phone = document.getElementById('searchedPhone').textContent;
+            let message = '';
+
+            if (method === 'help') {
+                message = `Hello, I need help with my lucky draw. My number is ${phone}. Please guide me through the payment process.`;
+            } else if (method === 'support') {
+                message = `Hello, I need customer support for my lucky draw. My number is ${phone}. Please help me with the payment.`;
+            }
+
+            // Show payment confirmation
+            Swal.fire({
+                title: 'Payment Support',
+                text: 'Please contact our support team to complete your payment process.',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Contact WhatsApp',
+                cancelButtonText: 'Call Now',
+                confirmButtonColor: '#25d366',
+                cancelButtonColor: '#007bff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(`https://wa.me/9190007924656?text=${encodeURIComponent(message)}`, '_blank');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    window.location.href = 'tel:+919163571821';
+                }
+            });
+        }
+
+        // Contact functions
+
+
+
+
+        // Load phone number on page load
+        window.onload = function() {
+            getPhoneFromURL();
+        };
+
+        // Initialize floating WhatsApp
+        $(function () {
+            $('#myButton').floatingWhatsApp({
+                phone: document.getElementById('HFSupportNumber').value,
+                popupMessage: 'Hello, How I help you?',
+                message: "",
+                showPopup: true,
+                showOnIE: false,
+                position: 'right',
+                headerTitle: 'Welcome to our Website ',
+                headerColor: 'green',
+                backgroundColor: 'green',
+                size: '60px'
+            });
+        });
+
+
+
+        // Toggle Payment Options
+        function togglePaymentOptions() {
+            const paymentGrid = document.getElementById('paymentAppsGrid');
+            if (paymentGrid.style.display === 'none' || paymentGrid.style.display === '') {
+                paymentGrid.style.display = 'flex';
+                paymentGrid.classList.add('show');
+            } else {
+                paymentGrid.style.display = 'none';
+                paymentGrid.classList.remove('show');
+            }
+        }
+
+        // Open Play Store for different payment apps
+        function openPlayStore(appType) {
+            const playStoreUrls = {
+                'paytm': 'https://play.google.com/store/apps/details?id=net.one97.paytm&hl=en_IN',
+                'phonepe': 'https://play.google.com/store/apps/details?id=com.phonepe.app&hl=en_IN',
+                'gpay': 'https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel&hl=en_IN',
+                'bhim': 'https://play.google.com/store/apps/details?id=in.org.npci.upiapp&hl=en_IN'
+            };
+
+            if (playStoreUrls[appType]) {
+                window.open(playStoreUrls[appType], '_blank');
+            }
+        }
+
+        // Support functions
+        function showHelplineInfo() {
+            alert('📞 Helpline Number: +919163571821\n⏰ Available 24/7\n💬 For immediate assistance');
+        }
+
+        function showCustomerSupport() {
+            alert('👨‍💼 Customer Support: +919163571821\n⏰ Mon-Sat 9AM-6PM\n📧 Email: Support@herbalwinnerprize.in');
+        }
+    </script>
+
+
+
+</body>
+</html>

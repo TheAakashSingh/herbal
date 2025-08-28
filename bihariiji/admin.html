@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/responsive1.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="plugins/floating-wpp/floating-wpp.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/hover.css">
+    <link rel="stylesheet" href="css/owl.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary px-3" style="height:56px;">
+        <button id="sidebarToggle" class="btn btn-link text-white"><span class="fa fa-bars"></span></button>
+        <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+    </nav>
+
+    <div class="d-flex">
+        <aside id="sidebar" class="bg-dark text-white p-0 admin-sidebar">
+            <div class="list-group list-group-flush">
+                <a href="#section-dashboard" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-home me-2"></span>Dashboard</a>
+                <a href="#section-upload" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-upload me-2"></span>Upload Excel</a>
+                <a href="#section-winners" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-trophy me-2"></span>Winner List</a>
+                <a href="#section-bank-details" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-bank me-2"></span>Bank Details</a>
+                <a href="#section-bank-update" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-refresh me-2"></span>Bank Update</a>
+                <a href="#section-update-prize" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-gift me-2"></span>Update Prize</a>
+                <a href="#section-prize-request" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-envelope-open me-2"></span>Prize Request</a>
+                <a href="#section-car-processing" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-car me-2"></span>Car Processing Request</a>
+                <a href="#section-logout" class="list-group-item list-group-item-action bg-dark text-white"><span class="fa fa-sign-out me-2"></span>Logout</a>
+            </div>
+        </aside>
+
+        <main class="flex-grow-1 p-3">
+            <section id="section-dashboard" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Welcome</h4>
+                        <p class="text-muted mb-0">Use the menu to manage uploads and view winners.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="section-upload" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3"><span class="me-2">📁</span>Upload Excel File</h4>
+                        <p class="text-muted">Select Excel File (.xlsx / .xls)</p>
+                        <div class="input-group mb-3">
+                            <input id="excelFile" type="file" accept=".xlsx,.xls" class="form-control">
+                            <button id="btnImport" class="btn btn-primary">Upload & Import</button>
+                        </div>
+                        <small class="text-muted">Expected columns: ID, Phone, Name, Address, Paid, Product, PrizeAmount, Date, Status, WCode</small>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-winners">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h4 class="card-title mb-0"><span class="me-2">🏆</span>Winner List</h4>
+                            <div class="d-flex gap-2">
+                                <input id="searchInput" type="text" class="form-control" placeholder="Search by Phone, Name, or W-Code" style="min-width:280px;">
+                                <button id="btnClearSearch" class="btn btn-outline-secondary">Clear</button>
+                                <button id="btnExport" class="btn btn-outline-primary">Export CSV</button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="winnersTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Phone No</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Paid</th>
+                                        <th>Product</th>
+                                        <th>Prize Amount</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>W-Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <div>
+                                <span id="rowsInfo" class="text-muted"></span>
+                            </div>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-bank-details" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Bank Details</h4>
+                        <p class="text-muted mb-0">Coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-bank-update" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Bank Update</h4>
+                        <p class="text-muted mb-0">Coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-update-prize" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Update Prize</h4>
+                        <p class="text-muted mb-0">Coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-prize-request" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Prize Request</h4>
+                        <p class="text-muted mb-0">Coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-car-processing" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Car Processing Request</h4>
+                        <p class="text-muted mb-0">Coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-logout" class="mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Logout</h4>
+                        <p class="text-muted mb-0">For a static demo, this is a placeholder.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+<!-- Simple static admin panel. Data is stored in localStorage under key 'winnersData'. -->
+ </html>
+
+

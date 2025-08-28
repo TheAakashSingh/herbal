@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        .main-content {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .table th {
+            background: #f8f9fa;
+            border: none;
+            font-weight: 600;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-paid { background: #d1ecf1; color: #0c5460; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar p-0">
+                <div class="p-3">
+                    <h4 class="text-white mb-4">
+                        <i class="fas fa-crown me-2"></i>Admin Panel
+                    </h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                        <a class="nav-link active" href="/admin/winners">
+                            <i class="fas fa-trophy me-2"></i>Winners
+                        </a>
+                        <a class="nav-link" href="/admin/upload">
+                            <i class="fas fa-upload me-2"></i>Upload
+                        </a>
+                        <a class="nav-link" href="/admin/bank-details">
+                            <i class="fas fa-university me-2"></i>Bank Details
+                        </a>
+                        <a class="nav-link" href="/admin/prize-request">
+                            <i class="fas fa-gift me-2"></i>Prize Requests
+                        </a>
+                        <a class="nav-link" href="/admin/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content p-4">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2><i class="fas fa-trophy me-2"></i><%= title %></h2>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addWinnerModal">
+                            <i class="fas fa-plus me-2"></i>Add Winner
+                        </button>
+                        <a href="/admin/upload" class="btn btn-success">
+                            <i class="fas fa-upload me-2"></i>Upload Images
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Alerts -->
+                <% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= success %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+                <% if (typeof error !== 'undefined' && error && error.length > 0) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="GET" action="/admin/winners" class="row g-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="search" placeholder="Search by name, phone, or W-Code" value="<%= search %>">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" name="status">
+                                    <option value="">All Status</option>
+                                    <option value="Pending" <%= status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Approved" <%= status === 'Approved' ? 'selected' : '' %>>Approved</option>
+                                    <option value="Paid" <%= status === 'Paid' ? 'selected' : '' %>>Paid</option>
+                                    <option value="Rejected" <%= status === 'Rejected' ? 'selected' : '' %>>Rejected</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search me-2"></i>Filter
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="/admin/winners" class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-refresh me-2"></i>Clear
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Winners Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>W-Code</th>
+                                        <th>Prize Amount</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (winners && winners.length > 0) { %>
+                                        <% winners.forEach(winner => { %>
+                                            <tr>
+                                                <td>
+                                                    <% if (winner.image) { %>
+                                                        <img src="<%= winner.image %>" alt="Winner" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                                    <% } else { %>
+                                                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-white"></i>
+                                                        </div>
+                                                    <% } %>
+                                                </td>
+                                                <td><%= winner.name %></td>
+                                                <td><%= winner.phone %></td>
+                                                <td><%= winner.wcode %></td>
+                                                <td>₹<%= winner.prizeAmount %></td>
+                                                <td>
+                                                    <span class="status-badge status-<%= winner.status.toLowerCase() %>">
+                                                        <%= winner.status %>
+                                                    </span>
+                                                </td>
+                                                <td><%= new Date(winner.createdAt).toLocaleDateString() %></td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="editWinner('<%= winner._id %>')">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteWinner('<%= winner._id %>')">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="8" class="text-center py-4">
+                                                <i class="fas fa-trophy fa-3x text-muted mb-3"></i>
+                                                <p class="text-muted">No winners found</p>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <% if (pagination && pagination.totalPages > 1) { %>
+                            <nav aria-label="Winners pagination" class="mt-4">
+                                <ul class="pagination justify-content-center">
+                                    <% if (pagination.hasPrev) { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=<%= pagination.prevPage %>&search=<%= search %>&status=<%= status %>">Previous</a>
+                                        </li>
+                                    <% } %>
+                                    
+                                    <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+                                        <li class="page-item <%= pagination.page === i ? 'active' : '' %>">
+                                            <a class="page-link" href="?page=<%= i %>&search=<%= search %>&status=<%= status %>"><%= i %></a>
+                                        </li>
+                                    <% } %>
+                                    
+                                    <% if (pagination.hasNext) { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=<%= pagination.nextPage %>&search=<%= search %>&status=<%= status %>">Next</a>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </nav>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Winner Modal -->
+    <div class="modal fade" id="addWinnerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Winner</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="/admin/winners" method="POST">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone *</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="wcode" class="form-label">W-Code *</label>
+                                    <input type="text" class="form-control" id="wcode" name="wcode" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">ID *</label>
+                                    <input type="text" class="form-control" id="id" name="id" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address *</label>
+                            <textarea class="form-control" id="address" name="address" rows="2" required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="product" class="form-label">Product *</label>
+                                    <input type="text" class="form-control" id="product" name="product" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="prizeAmount" class="form-label">Prize Amount *</label>
+                                    <input type="text" class="form-control" id="prizeAmount" name="prizeAmount" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="date" class="form-label">Date *</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="paid" class="form-label">Paid Status *</label>
+                                    <select class="form-select" id="paid" name="paid" required>
+                                        <option value="">Select Status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status *</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Winner</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function editWinner(id) {
+            // Implement edit functionality
+            window.location.href = `/admin/winners/${id}/edit`;
+        }
+
+        function deleteWinner(id) {
+            if (confirm('Are you sure you want to delete this winner?')) {
+                fetch(`/admin/winners/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error deleting winner');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting winner');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
