@@ -231,7 +231,7 @@ router.post('/winners', requireAuth, async (req, res) => {
       prizeAmount,
       date,
       wcode,
-      status: status || 'Pending',
+      status: status || 'Active',
       isActive: true
     });
 
@@ -315,7 +315,7 @@ router.post('/upload', requireAuth, upload.single('excelFile'), async (req, res)
           product: row['Product'] || row['product'],
           prizeAmount: row['Prize Amount:'] || row['Prize Amount'] || row['prizeAmount'],
           date: row['Date:'] || row['Date'] || row['date'],
-          status: row['Status'] || row['status'] || 'Pending',
+          status: row['Status'] || row['status'] || 'Active',
           wcode: row['W-Code'] || row['wcode'] || `W${Date.now()}${i}`
         };
 
@@ -591,7 +591,7 @@ router.post('/bank-update', requireAuth, async (req, res) => {
       bankDetails.accountHolderName = accountHolderName;
       bankDetails.branchName = branchName || '';
       bankDetails.prizeAmount = parseFloat(prizeAmount) || winner.prizeAmount;
-      bankDetails.status = status || 'Pending';
+      bankDetails.status = status || 'Active';
       bankDetails.notes = notes || '';
       bankDetails.updatedBy = req.session.adminUsername || 'Admin';
 
@@ -610,7 +610,7 @@ router.post('/bank-update', requireAuth, async (req, res) => {
         accountHolderName,
         branchName: branchName || '',
         prizeAmount: parseFloat(prizeAmount) || winner.prizeAmount,
-        status: status || 'Pending',
+        status: status || 'Active',
         notes: notes || '',
         createdBy: req.session.adminUsername || 'Admin'
       });
@@ -665,7 +665,7 @@ router.get('/prize-request', requireAuth, async (req, res) => {
         phone: '9398475946',
         prizeAmount: 325,
         requestDate: new Date(),
-        status: 'Pending'
+        status: 'Active'
       },
       {
         id: 1002,

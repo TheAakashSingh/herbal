@@ -41,8 +41,8 @@ const winnerSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['Pending', 'Approved', 'Rejected', 'Paid'],
-    default: 'Pending'
+    enum: ['Active', 'ACTIVE', 'Inactive'],
+    default: 'Active'
   },
   wcode: {
     type: String,
