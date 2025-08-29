@@ -735,6 +735,8 @@
                                     <li>Phone No: <strong><%= winner.phone %></strong></li>
                                     <li>Name: <strong><%= winner.name %></strong></li>
                                     <li>Address: <strong><%= winner.address %></strong></li>
+                                    <li>Paid: <strong><%= winner.paid %></strong></li>
+                                    <li>Product: <strong><%= winner.product %></strong></li>
                                     <li>Prize Amount: <strong>₹<%= winner.prizeAmount %></strong></li>
                                     <li>Status: <strong style="color: <%= winner.status === 'Active' ? '#28a745' : '#007bff' %>"><%= winner.status %></strong></li>
                                     <li>Date: <strong><%= winner.formattedDate %></strong></li>
@@ -849,12 +851,12 @@
                 <!-- Process buttons -->
                 <div class="process-section">
                     <div class="process-buttons">
-                        <button class="process-btn" onclick="window.location.href='winner-cash'">
+                        <a class="process-btn" href='/winner-cash'>
                             CASH PROCESS
-                        </button>
-                        <button class="process-btn" onclick="window.location.href='car-processing'">
+                        </a>
+                        <a class="process-btn" href='/car-processing'>
                             CAR PROCESS
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

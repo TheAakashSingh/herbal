@@ -272,7 +272,7 @@ router.get('/search-result', async (req, res) => {
       })
         .sort({ createdAt: -1 })
         .limit(20)
-        .select('name phone image wcode createdAt prizeAmount address status');
+        .select('name phone image wcode createdAt prizeAmount address status paid product');
 
       // Mask phone numbers for privacy
       winners = winners.map(winner => ({
@@ -316,12 +316,28 @@ router.get('/prize-details', (req, res) => {
 
 // GET /winner-cash - Winner cash page
 router.get('/winner-cash', (req, res) => {
-  res.sendFile(path.join(__dirname, '../winner-cash.html'));
+  try {
+    res.render('public/winner-cash', {
+      title: 'Winner Cash - Online Shopping',
+      currentPage: 'winner-cash'
+    });
+  } catch (error) {
+    console.error('Winner cash page error:', error);
+    res.status(500).send('Error loading page');
+  }
 });
 
 // GET /car-processing - Car processing page
 router.get('/car-processing', (req, res) => {
-  res.sendFile(path.join(__dirname, '../car-processing.html'));
+  try {
+    res.render('public/car-processing', {
+      title: 'Car Processing - Online Shopping',
+      currentPage: 'car-processing'
+    });
+  } catch (error) {
+    console.error('Car processing page error:', error);
+    res.status(500).send('Error loading page');
+  }
 });
 
 // POST /check-status - Check winner status by phone or W-Code
@@ -400,6 +416,7 @@ router.get('/winner-details/:wcode', async (req, res) => {
         prizeAmount: winner.prizeAmount,
         product: winner.product,
         date: winner.date,
+        paid: winner.paid,
         image: winner.image
       }
     });
@@ -510,7 +527,7 @@ router.get('/search-winners', async (req, res) => {
     const winners = await Winner.find(searchQuery)
       .sort({ createdAt: -1 })
       .limit(50)
-      .select('name phone wcode prizeAmount product date image createdAt');
+      .select('name phone wcode prizeAmount product date image createdAt paid');
 
     // Mask phone numbers for privacy
     const maskedWinners = winners.map(winner => ({
