@@ -89,6 +89,18 @@
         .navbar-brand {
             font-weight: 700;
         }
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .sidebar { width: 100%; position: relative; min-height: auto; }
+            .main-content { margin-left: 0; }
+            .top-header { padding: 12px 16px; }
+            .content-area { padding: 15px; }
+        }
+        @media (max-width: 767.98px) {
+            .table { font-size: 13px; }
+            .card .card-body { padding: 0.75rem; }
+            .stat-icon { width: 48px; height: 48px; font-size: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -110,6 +122,9 @@
             <a class="nav-link" href="/admin/upload">
                 <i class="fas fa-upload"></i>Upload Excel
             </a>
+            <a class="nav-link" href="/admin/prizes">
+                <i class="fas fa-gift"></i>Prize Management
+            </a>
             <a class="nav-link" href="/admin/winners">
                 <i class="fas fa-trophy"></i>Winner List
             </a>
@@ -122,9 +137,9 @@
             <!-- <a class="nav-link" href="/admin/bank-update">
                 <i class="fas fa-edit"></i>Bank Update
             </a> -->
-            <a class="nav-link" href="/admin/update-prize">
+            <!-- <a class="nav-link" href="/admin/update-prize">
                 <i class="fas fa-gift"></i>Update Prize
-            </a>
+            </a> -->
             <a class="nav-link" href="/admin/prize-request">
                 <i class="fas fa-hand-paper"></i>Prize Request
             </a>
@@ -286,7 +301,7 @@
                                     <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Status Distribution</h5>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="statusChart" width="300" height="300"></canvas>
+                                    <canvas id="statusChart" width="300" height="300" data-pending="<%= stats.pendingWinners %>" data-approved="<%= stats.approvedWinners %>" data-paid="<%= stats.paidWinners %>"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -300,13 +315,19 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
         // Status Distribution Chart
-        const ctx = document.getElementById('statusChart').getContext('2d');
+        const chartEl = document.getElementById('statusChart');
+        const ctx = chartEl.getContext('2d');
+        const counts = [
+            parseInt(chartEl.dataset.pending || '0', 10),
+            parseInt(chartEl.dataset.approved || '0', 10),
+            parseInt(chartEl.dataset.paid || '0', 10)
+        ];
         new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: ['Pending', 'Approved', 'Paid'],
                 datasets: [{
-                    data: [<%= stats.pendingWinners %>, <%= stats.approvedWinners %>, <%= stats.paidWinners %>],
+                    data: counts,
                     backgroundColor: [
                         '#f093fb',
                         '#56ab2f',

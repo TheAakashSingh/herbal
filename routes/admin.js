@@ -4,12 +4,13 @@ const Admin = require('../models/Admin');
 const Winner = require('../models/Winner');
 const BankDetails = require('../models/BankDetails');
 const CompanyBankDetails = require('../models/CompanyBankDetails');
+const Prize = require('../models/Prize');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
 const fs = require('fs');
 
-// Configure multer for file uploads
+// Configure multer for Excel uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uploadDir = 'uploads/excel/';
@@ -36,6 +37,35 @@ const upload = multer({
   },
   limits: {
     fileSize: 10 * 1024 * 1024 // 10MB limit
+  }
+});
+
+// Configure multer for prize image uploads
+const imageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const imagesDir = path.join(__dirname, '..', 'images');
+    if (!fs.existsSync(imagesDir)) {
+      fs.mkdirSync(imagesDir, { recursive: true });
+    }
+    cb(null, imagesDir);
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const safeBase = path.basename(file.originalname, ext).replace(/[^a-z0-9_-]/gi, '');
+    cb(null, `${Date.now()}-${safeBase}${ext}`);
+  }
+});
+
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+  fileFilter: function (req, file, cb) {
+    const allowed = ['.jpg', '.jpeg', '.png', '.webp'];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (!allowed.includes(ext)) {
+      return cb(new Error('Only JPG, PNG, WEBP images allowed'));
+    }
+    cb(null, true);
   }
 });
 
@@ -842,6 +872,101 @@ router.delete('/company-bank/:id', requireAuth, async (req, res) => {
   } catch (error) {
     console.error('Delete company bank error:', error);
     res.json({ success: false, message: 'Error deleting company bank details' });
+  }
+});
+
+// ==================== PRIZE MANAGEMENT ROUTES ====================
+
+// Get all prizes
+router.get('/prizes', requireAuth, async (req, res) => {
+  try {
+    const prizes = await Prize.find().sort({ position: 1 });
+    res.render('admin/prizes', {
+      title: 'Prize Management',
+      adminUsername: req.session.adminUsername,
+      prizes,
+      success: req.flash('success'),
+      error: req.flash('error')
+    });
+  } catch (error) {
+    console.error('Error fetching prizes:', error);
+    req.flash('error', 'Error loading prizes');
+    res.redirect('/admin/dashboard');
+  }
+});
+
+// Add new prize
+router.post('/prizes/add', requireAuth, imageUpload.single('image'), async (req, res) => {
+  try {
+    const { title, description, amount, position, emoji, medal } = req.body;
+
+    if (!req.file) {
+      req.flash('error', 'Image is required and must be JPG, PNG, or WEBP under 2MB');
+      return res.redirect('/admin/prizes');
+    }
+
+    const newPrize = new Prize({
+      title,
+      description,
+      amount: parseInt(amount),
+      image: req.file.filename,
+      position: parseInt(position),
+      emoji: emoji || '🏆',
+      medal: medal || '🏆'
+    });
+
+    await newPrize.save();
+    req.flash('success', 'Prize added successfully!');
+    res.redirect('/admin/prizes');
+  } catch (error) {
+    console.error('Error adding prize:', error);
+    req.flash('error', 'Error adding prize: ' + error.message);
+    res.redirect('/admin/prizes');
+  }
+});
+
+// Update prize
+router.post('/prizes/update/:id', requireAuth, imageUpload.single('image'), async (req, res) => {
+  try {
+    const { title, description, amount, position, emoji, medal, isActive, existingImage } = req.body;
+
+    const updateDoc = {
+      title,
+      description,
+      amount: parseInt(amount),
+      position: parseInt(position),
+      emoji: emoji || '🏆',
+      medal: medal || '🏆',
+      isActive: isActive === 'on'
+    };
+
+    if (req.file) {
+      updateDoc.image = req.file.filename;
+    } else if (existingImage) {
+      updateDoc.image = existingImage;
+    }
+
+    await Prize.findByIdAndUpdate(req.params.id, updateDoc);
+
+    req.flash('success', 'Prize updated successfully!');
+    res.redirect('/admin/prizes');
+  } catch (error) {
+    console.error('Error updating prize:', error);
+    req.flash('error', 'Error updating prize: ' + error.message);
+    res.redirect('/admin/prizes');
+  }
+});
+
+// Delete prize
+router.post('/prizes/delete/:id', requireAuth, async (req, res) => {
+  try {
+    await Prize.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Prize deleted successfully!');
+    res.redirect('/admin/prizes');
+  } catch (error) {
+    console.error('Error deleting prize:', error);
+    req.flash('error', 'Error deleting prize: ' + error.message);
+    res.redirect('/admin/prizes');
   }
 });
 

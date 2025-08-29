@@ -479,30 +479,44 @@
                     <div class="responsive-prize-container">
 						<h3 class="responsive-prize-title">🏆 AMAZING PRIZES 🏆</h3>
 						<div class="responsive-prize-grid">
-							<div class="responsive-prize-card prize-card-1">
-								<div class="responsive-prize-text">
-                                    <span class="responsive-prize-emoji" style="color: #FFD700;">🥇</span>
-                                    <strong>1st Prize:</strong>
-                                    <span class="responsive-prize-amount">Maruti XL6 Rs 14,80,000</span>
-                                </div>
-								<img src="images/win1.jpg" class="responsive-prize-image" alt="Maruti XL6"/>
-							</div>
-							<div class="responsive-prize-card prize-card-2">
-								<div class="responsive-prize-text">
-                                    <span class="responsive-prize-emoji" style="color: #C0C0C0;">🥈</span>
-                                    <strong>2nd Prize:</strong>
-                                    <span class="responsive-prize-amount">Tata Nexon Rs 9,80,000</span>
-                                </div>
-								<img src="images/win2.jpg" class="responsive-prize-image" alt="Tata Nexon"/>
-							</div>
-							<div class="responsive-prize-card prize-card-3">
-								<div class="responsive-prize-text">
-                                    <span class="responsive-prize-emoji" style="color: #CD7F32;">🥉</span>
-                                    <strong>3rd Prize:</strong>
-                                    <span class="responsive-prize-amount">Maruti Swift Dzire Rs 9,30,000</span>
-                                </div>
-								<img src="images/win3.jpg" class="responsive-prize-image" alt="Maruti Swift Dzire"/>
-							</div>
+							<% if (prizes && prizes.length > 0) { %>
+								<% prizes.forEach((prize, index) => { %>
+									<div class="responsive-prize-card prize-card-<%= index + 1 %>">
+										<div class="responsive-prize-text">
+											<span class="responsive-prize-emoji" style="color: <%= index === 0 ? '#FFD700' : index === 1 ? '#C0C0C0' : '#CD7F32' %>;"><%= prize.medal %></span>
+											<strong><%= prize.position %><%= prize.position === 1 ? 'st' : prize.position === 2 ? 'nd' : prize.position === 3 ? 'rd' : 'th' %> Prize:</strong>
+											<span class="responsive-prize-amount"><%= prize.description %></span>
+										</div>
+										<img src="images/<%= prize.image %>" class="responsive-prize-image" alt="<%= prize.title %>"/>
+									</div>
+								<% }) %>
+							<% } else { %>
+								<!-- Fallback to static prizes if no dynamic prizes -->
+								<div class="responsive-prize-card prize-card-1">
+									<div class="responsive-prize-text">
+										<span class="responsive-prize-emoji" style="color: #FFD700;">🥇</span>
+										<strong>1st Prize:</strong>
+										<span class="responsive-prize-amount">Maruti XL6 Rs 14,80,000</span>
+									</div>
+									<img src="images/win1.jpg" class="responsive-prize-image" alt="Maruti XL6"/>
+								</div>
+								<div class="responsive-prize-card prize-card-2">
+									<div class="responsive-prize-text">
+										<span class="responsive-prize-emoji" style="color: #C0C0C0;">🥈</span>
+										<strong>2nd Prize:</strong>
+										<span class="responsive-prize-amount">Tata Nexon Rs 9,80,000</span>
+									</div>
+									<img src="images/win2.jpg" class="responsive-prize-image" alt="Tata Nexon"/>
+								</div>
+								<div class="responsive-prize-card prize-card-3">
+									<div class="responsive-prize-text">
+										<span class="responsive-prize-emoji" style="color: #CD7F32;">🥉</span>
+										<strong>3rd Prize:</strong>
+										<span class="responsive-prize-amount">Maruti Swift Dzire Rs 9,30,000</span>
+									</div>
+									<img src="images/win3.jpg" class="responsive-prize-image" alt="Maruti Swift Dzire"/>
+								</div>
+							<% } %>
 						</div>
 					</div>
                 </div>

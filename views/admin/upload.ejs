@@ -103,6 +103,17 @@
         .upload-button:hover {
             background: #0056b3;
         }
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .sidebar { width: 100%; position: relative; min-height: auto; }
+            .main-content { margin-left: 0; }
+            .top-header { padding: 12px 16px; }
+            .content-area { padding: 15px; }
+            .upload-card { padding: 20px; }
+        }
+        @media (max-width: 767.98px) {
+            #fileName { display: block; margin-top: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -130,9 +141,9 @@
             <a class="nav-link" href="/admin/company-bank">
                 <i class="fas fa-building"></i>Company Bank
             </a>
-            <a class="nav-link" href="/admin/update-prize">
+            <!-- <a class="nav-link" href="/admin/update-prize">
                 <i class="fas fa-gift"></i>Update Prize
-            </a>
+            </a> -->
             <a class="nav-link" href="/admin/prize-request">
                 <i class="fas fa-hand-paper"></i>Prize Request
             </a>

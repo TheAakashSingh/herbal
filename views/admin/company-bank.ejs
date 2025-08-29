@@ -8,19 +8,33 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .sidebar {
+            background: #1e4d72;
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
         }
         .sidebar .nav-link {
-            color: rgba(255,255,255,0.8);
-            padding: 0.75rem 1rem;
-            margin: 0.25rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
         }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
             color: white;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+        }
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 10px;
         }
         .main-content {
             background: #f8f9fa;
@@ -43,6 +57,15 @@
         .badge-primary { background: #007bff !important; }
         .badge-success { background: #28a745 !important; }
         .badge-warning { background: #ffc107 !important; color: #212529 !important; }
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .sidebar { width: 100%; position: relative; min-height: auto; }
+            .main-content { margin-left: 0; }
+        }
+        @media (max-width: 767.98px) {
+            .table { font-size: 13px; }
+            .btn-group[role="group"] { flex-wrap: wrap; gap: 6px; }
+        }
     </style>
 </head>
 <body>
@@ -54,27 +77,39 @@
                     <h4 class="text-white mb-4">
                         <i class="fas fa-crown me-2"></i>Admin Panel
                     </h4>
-                    <nav class="nav flex-column">
-                        <a class="nav-link" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                        </a>
-                        <a class="nav-link" href="/admin/winners">
-                            <i class="fas fa-trophy me-2"></i>Winners
+                    <nav class="nav flex-column mt-3">
+                        <a class="nav-link active" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt"></i>Dashboard
                         </a>
                         <a class="nav-link" href="/admin/upload">
-                            <i class="fas fa-upload me-2"></i>Upload
+                            <i class="fas fa-upload"></i>Upload Excel
+                        </a>
+                        <a class="nav-link" href="/admin/prizes">
+                            <i class="fas fa-gift"></i>Prize Management
+                        </a>
+                        <a class="nav-link" href="/admin/winners">
+                            <i class="fas fa-trophy"></i>Winner List
                         </a>
                         <!-- <a class="nav-link" href="/admin/bank-details">
-                            <i class="fas fa-university me-2"></i>Bank Details
+                            <i class="fas fa-university"></i>Bank Details
                         </a> -->
                         <a class="nav-link" href="/admin/company-bank">
                             <i class="fas fa-building"></i>Company Bank
                         </a>
+                        <!-- <a class="nav-link" href="/admin/bank-update">
+                            <i class="fas fa-edit"></i>Bank Update
+                        </a> -->
+                        <!-- <a class="nav-link" href="/admin/update-prize">
+                            <i class="fas fa-gift"></i>Update Prize
+                        </a> -->
                         <a class="nav-link" href="/admin/prize-request">
-                            <i class="fas fa-gift me-2"></i>Prize Requests
+                            <i class="fas fa-hand-paper"></i>Prize Request
+                        </a>
+                        <a class="nav-link" href="/admin/car-processing">
+                            <i class="fas fa-car"></i>Car Processing Request
                         </a>
                         <a class="nav-link" href="/admin/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            <i class="fas fa-sign-out-alt"></i>Logout
                         </a>
                     </nav>
                 </div>

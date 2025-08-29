@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Winner = require('../models/Winner');
 const CompanyBankDetails = require('../models/CompanyBankDetails');
+const Prize = require('../models/Prize');
 const path = require('path');
 
 // GET / - Home page with dynamic data
@@ -22,17 +23,22 @@ router.get('/', async (req, res) => {
       phone: winner.phone.replace(/(\d{2})\d+(\d{2})/, '$1XXXXXX$2')
     }));
 
+    // Get active prizes for display
+    const prizes = await Prize.find({ isActive: true }).sort({ position: 1 }).limit(10);
+
     res.render('public/index', {
       title: 'Online Shopping',
       recentWinners: maskedWinners,
-      currentPage: 'home'
+      currentPage: 'home',
+      prizes: prizes || []
     });
   } catch (error) {
     console.error('Home page error:', error);
     res.render('public/index', {
       title: 'Online Shopping',
       recentWinners: [],
-      currentPage: 'home'
+      currentPage: 'home',
+      prizes: []
     });
   }
 });
