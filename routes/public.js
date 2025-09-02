@@ -263,6 +263,9 @@ router.get('/search-result', async (req, res) => {
     const companyBankDetails = await CompanyBankDetails.getPrimary() ||
       await CompanyBankDetails.findOne({ isActive: true, purpose: 'Prize Distribution' });
 
+    // Get active prizes for display
+    const prizes = await Prize.find({ isActive: true }).sort({ position: 1 }).limit(5);
+
     if (searchQuery && type === 'phone') {
       // Search for winners by phone number - include all statuses
       winners = await Winner.find({
@@ -293,7 +296,8 @@ router.get('/search-result', async (req, res) => {
       searchType: type || 'phone',
       error: error,
       currentPage: 'search',
-      companyBankDetails: companyBankDetails ? companyBankDetails.toFrontendFormat() : null
+      companyBankDetails: companyBankDetails ? companyBankDetails.toFrontendFormat() : null,
+      prizes: prizes
     });
   } catch (error) {
     console.error('Search result error:', error);
@@ -304,7 +308,8 @@ router.get('/search-result', async (req, res) => {
       searchType: 'phone',
       error: 'An error occurred while searching',
       currentPage: 'search',
-      companyBankDetails: null
+      companyBankDetails: null,
+      prizes: []
     });
   }
 });

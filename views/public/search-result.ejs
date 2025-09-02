@@ -383,6 +383,44 @@
             background: white;
         }
 
+        /* Single Prize Display Styles */
+        .single-prize-display {
+            background: #f8f9fa;
+            border: 2px solid #2c4a6b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .prize-image-container {
+            margin-bottom: 15px;
+        }
+
+        .single-prize-image {
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 3px solid #fff;
+        }
+
+        .prize-info h4 {
+            color: #2c4a6b;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .prize-info p {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
         .winner-details-list {
             list-style: none;
             padding: 0;
@@ -719,6 +757,34 @@
                     <p><strong>Search Query:</strong> <%= searchQuery %></p>
                     <p><strong>Results Found:</strong> <%= winners ? winners.length : 0 %></p>
                 <% } %> -->
+                <!-- Single Random Prize Image Display -->
+                <% if (prizes && prizes.length > 0) { %>
+                    <% 
+                    // Get a random prize from the array
+                    const randomIndex = Math.floor(Math.random() * prizes.length);
+                    const randomPrize = prizes[randomIndex];
+                    %>
+                    <div class="single-prize-display">
+                        <div class="prize-image-container">
+                            <img src="images/<%= randomPrize.image %>" class="single-prize-image" alt="<%= randomPrize.title %>"/>
+                        </div>
+                        <div class="prize-info">
+                            <h4><%= randomPrize.position %><%= randomPrize.position === 1 ? 'st' : randomPrize.position === 2 ? 'nd' : randomPrize.position === 3 ? 'rd' : 'th' %> Prize</h4>
+                            <p><%= randomPrize.description %></p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <!-- Fallback prize display if no prizes are available -->
+                    <div class="single-prize-display">
+                        <div class="prize-image-container">
+                            <img src="images/win1.jpg" class="single-prize-image" alt="Prize"/>
+                        </div>
+                        <!-- <div class="prize-info">
+                            <h4>1st Prize</h4>
+                            <p>Congratulations! You have won a special prize.</p>
+                        </div> -->
+                    </div>
+                <% } %>
 
                 <% if (error) { %>
                     <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin: 15px 0;">
