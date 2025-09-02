@@ -593,45 +593,7 @@
     <!-- team section end -->
 
     <!-- sponsors section -->
-    <section class="sponsors-section">
-        <div class="container">
-			<div class="testimonial-title centered">
-				<div class="section-title">
-					<h2>Our latest Winners</h2></div>
-				<div class="title-text"></div>
-			</div>
-            <div class="sponsors-area">
-                <ul class='sponsors-slider'>
-                    <% if (recentWinners && recentWinners.length > 0) { %>
-                        <% recentWinners.forEach(winner => { %>
-                            <li>
-                                <div class='winner-data-1'>
-                                    <% if (winner.image) { %>
-                                        <img class='img-responsive' src='<%= winner.image %>' alt='<%= winner.name %>' />
-                                    <% } else { %>
-                                        <img class='img-responsive' src='images/default-winner.jpg' alt='<%= winner.name %>' />
-                                    <% } %>
-                                    <h4><%= winner.name %></h4>
-                                    <p>Mobile:- <a href='tel:<%= winner.phone %>'><%= winner.phone %></a></p>
-                                    <p>Prize: ₹<%= winner.prizeAmount %></p>
-                                </div>
-                            </li>
-                        <% }) %>
-                    <% } else { %>
-                        <!-- Default static winners if no dynamic data -->
-                        <li><div class='winner-data-1'>
-                            <img class='img-responsive' src='admin_panel/winner/1.jpg' /><h4>Manoj Kumar</h4><p> Mobile:- <a href= 'tel:98XXXXXX12'>98XXXXXX12</a></p></div></li>
-                        <li><div class='winner-data-1'>
-                            <img class='img-responsive' src='admin_panel/winner/2.jpg' /><h4>Radha Bisnoi</h4><p> Mobile:- <a href= 'tel:62XXXXXX77'>62XXXXXX77</a></p></div></li>
-                        <li><div class='winner-data-1'>
-                            <img class='img-responsive' src='admin_panel/winner/3.jpg' /><h4>Raghvendra Singh</h4><p> Mobile:- <a href= 'tel:87XXXXXX24'>87XXXXXX24</a></p></div></li>
-                        <li><div class='winner-data-1'>
-                            <img class='img-responsive' src='admin_panel/winner/4.jpg' /><h4>Kalyan Gurjar</h4><p> Mobile:- <a href= 'tel:88XXXXXX66'>88XXXXXX66</a></p></div></li>
-                    <% } %>
-                </ul>
-		   </div>
-        </div>
-    </section>
+ 
     <!-- sponsors section end -->
      
 </div>
